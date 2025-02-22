@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_playground/pages/home_page.dart';
+import 'package:supabase_playground/pages/sign_in_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,14 +24,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Supabase 테스트'),
-        ),
-        body: const Center(
-          child: Text('supabase 연결 성공 !'),
-        ),
-      ),
+      initialRoute: '/sign_in',
+      routes: {
+        '/sign_in': (context) => SignInPage(),
+        '/home': (context) => HomePage(
+            authResponse:
+                ModalRoute.of(context)!.settings.arguments as AuthResponse),
+      },
+
+      // home: Scaffold(
+      //   appBar: AppBar(
+      //     title: const Text('Supabase 테스트'),
+      //   ),
+      //   body: const Center(
+      //     child: Text('supabase 연결 성공 !'),
+      //   ),
+      // ),
     );
   }
 }
